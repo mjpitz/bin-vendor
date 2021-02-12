@@ -2,6 +2,7 @@
 
 A very simple way to vendor binary tools your projects use.
 Regardless of what language you work with, you often need specific versions of developer tools.
+`bin-vendor` makes it easy to manage tool versions.
 
 ## Status
 
