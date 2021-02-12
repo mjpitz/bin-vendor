@@ -7,6 +7,8 @@ Regardless of what language you work with, you often need specific versions of d
 ## Status
 
 ![experimental](https://img.shields.io/badge/-experimental-yellow?style=for-the-badge)
+[![Release](https://img.shields.io/github/release/mjpitz/bin-vendor.svg?style=for-the-badge)](https://github.com/mjpitz/bin-vendor/releases/latest)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](/LICENSE)
 
 ## Getting started
 
