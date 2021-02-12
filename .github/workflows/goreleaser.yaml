@@ -1,0 +1,22 @@
+name: goreleaser
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:1.15-alpine3.12
+    steps:
+      - name: Prepare
+        run: apk -U upgrade && apk add build-base git ca-certificates curl
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          make release
