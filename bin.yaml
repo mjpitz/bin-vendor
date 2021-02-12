@@ -1,0 +1,32 @@
+# -- Your projects name.
+name: bin-vendor
+
+tools:
+  - # -- The name of the tool.
+    name: goreleaser
+    # -- The version of the tool you want to download.
+    version: v0.155.1
+    # -- We currently only support GitHub release assets.
+    github_release:
+      # -- The repo where the tool can be downloaded from.
+      repo: goreleaser/goreleaser
+      replacements:
+        386: i386
+        amd64: x86_64
+      linux: goreleaser_Linux_{{ .Arch }}.tar.gz
+      osx: goreleaser_Darwin_{{ .Arch }}.tar.gz
+      windows: goreleaser_Windows_{{ .Arch }}.zip
+
+  - name: staticcheck
+    version: 2020.2.1
+    github_release:
+      repo: dominikh/go-tools
+      # -- Alternatively, you can use a single general format.
+      format: staticcheck_{{ .OS }}_{{ .Arch }}.tar.gz
+
+  - name: golangci-lint
+    version: v1.36.0
+    github_release:
+      repo: golangci/golangci-lint
+      format: golangci-lint-{{ .Version | trimPrefix "v" }}-{{ .OS }}-{{ .Arch }}.tar.gz
+      windows: golangci-lint-{{ .Version | trimPrefix "v" }}-windows-{{ .Arch }}.zip
