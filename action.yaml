@@ -21,7 +21,7 @@ runs:
         pushd ${HOME}/bin-vendor
         curl -sSLo bin-vendor.tar.gz https://github.com/mjpitz/bin-vendor/releases/download/${VERSION}/bin-vendor_${VERSION##v}_linux_amd64.tar.gz
         tar zxf bin-vendor.tar.gz
-        mv ./bin-vendor /usr/local/bin/bin-vendor
+        sudo mv ./bin-vendor /usr/local/bin/bin-vendor
         ls -la /usr/local/bin/
         popd
         rm -rf ${HOME}/bin-vendor
