@@ -12,8 +12,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup bin-vendor
-      shell: bash
+    - shell: bash
       env:
         VERSION: ${{ inputs.version }}
       run: |
@@ -22,8 +21,8 @@ runs:
         tar zxf bin-vendor.tar.gz
         sudo install ./bin-vendor /usr/local/bin/
         popd
+        echo "$GITHUB_PATH"
 
-    - name: Vendor binaries
-      shell: bash
+    - shell: bash
       run: |
         bin-vendor -config ${{ inputs.config }}
