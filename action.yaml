@@ -13,7 +13,7 @@ runs:
   using: "composite"
   steps:
     - name: Setup bin-vendor
-      working-directory: ~/
+      working-directory: /bin-vendor
       shell: bash
       env:
         VERSION: ${{ inputs.version }}
