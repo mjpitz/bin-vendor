@@ -3,7 +3,7 @@ description: "Download and manage project dependent toolchains."
 inputs:
   version:
     description: "Specify the version of bin-vendor to use"
-    default: "v0.0.3"
+    default: "v0.0.4"
     required: false
   config:
     description: "Where the configuration is located."
