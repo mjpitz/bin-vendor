@@ -25,3 +25,4 @@ runs:
     - shell: bash
       run: |
         bin-vendor -config ${{ inputs.config }}
+        echo "$(pwd)/bin" >> $GITHUB_PATH

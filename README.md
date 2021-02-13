@@ -22,3 +22,28 @@ Regardless of what language you work with, you often need specific versions of d
 That's it!
 All the tools you requested will be stored under the `bin/` directory of the project.
 You'll probably want to add your `bin/` directory to your `.gitignore`.
+
+### Using the GitHub Action
+
+The GitHub action makes working with bin-vendor a completely transparent process.
+Once setup, it vendors your project's tooling and prepends the system path with the projects bin dir.
+The block of yaml below shows how you can easily add bin-vendor to your build process and configure it.
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Vendor tooling
+        uses: mjpitz/bin-vendor@main
+        # with:
+        #   version: v0.0.4
+        #   config: alternate-bin.yaml
+
+      - name: Build
+        run: |
+          # invoke your binaries here ....
+```
