@@ -21,10 +21,9 @@ runs:
         curl -sSLo bin-vendor.tar.gz https://github.com/mjpitz/bin-vendor/releases/download/${VERSION}/bin-vendor_${VERSION##v}_linux_amd64.tar.gz
         tar zxf bin-vendor.tar.gz
         sudo install ./bin-vendor /usr/local/bin/
-        ls -la /usr/local/bin/
         popd && rm -rf ${HOME}/bin-vendor
 
     - name: Vendor binaries
       shell: bash
       run: |
-        bin-vendor -config ${{ inputs.config }}
+        sudo bin-vendor -config ${{ inputs.config }}
