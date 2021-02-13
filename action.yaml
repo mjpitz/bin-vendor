@@ -19,9 +19,10 @@ runs:
         pushd $(mktemp -d)
         curl -sSLo bin-vendor.tar.gz https://github.com/mjpitz/bin-vendor/releases/download/${VERSION}/bin-vendor_${VERSION##v}_linux_amd64.tar.gz
         tar zxf bin-vendor.tar.gz
+        file ./bin-vendor
         sudo install ./bin-vendor /usr/local/bin/
         popd
 
     - shell: bash
       run: |
-        bash -c "bin-vendor -config ${{ inputs.config }}"
+        bin-vendor -config ${{ inputs.config }}
