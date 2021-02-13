@@ -21,8 +21,7 @@ runs:
         tar zxf bin-vendor.tar.gz
         sudo install ./bin-vendor /usr/local/bin/
         popd
-        echo "$GITHUB_PATH"
 
     - shell: bash
       run: |
-        bin-vendor -config ${{ inputs.config }}
+        bash -c "bin-vendor -config ${{ inputs.config }}"
