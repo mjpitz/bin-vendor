@@ -1,0 +1,28 @@
+name: "bin-vendor"
+description: "Download and manage project dependent toolchains."
+inputs:
+  version:
+    description: "Specify the version of bin-vendor to use"
+    default: "v0.0.3"
+    required: false
+  config:
+    description: "Where the configuration is located."
+    default: "bin.yaml"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Download bin-vendor
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+      run: |
+        pushd $(mktemp -d)
+        curl -sSLo bin-vendor.tar.gz https://github.com/mjpitz/bin-vendor/releases/download/${VERSION}/bin-vendor_${VERSION##v}_linux_amd64.tar.gz
+        tar zxf bin-vendor.tar.gz
+        sudo install bin-vendor /usr/local/bin
+        popd
+
+    - name: Vendor binaries
+      shell: bash
+      run: bin-vendor -config ${{ inputs.config }}
