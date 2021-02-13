@@ -13,16 +13,17 @@ runs:
   using: "composite"
   steps:
     - name: Setup bin-vendor
-      working-directory: /bin-vendor
       shell: bash
       env:
         VERSION: ${{ inputs.version }}
       run: |
+        pushd $(mktemp -d)
         curl -sSLo bin-vendor.tar.gz https://github.com/mjpitz/bin-vendor/releases/download/${VERSION}/bin-vendor_${VERSION##v}_linux_amd64.tar.gz
         tar zxf bin-vendor.tar.gz
         sudo install ./bin-vendor /usr/local/bin/
+        popd
 
     - name: Vendor binaries
       shell: bash
       run: |
-        sudo bin-vendor -config ${{ inputs.config }}
+        bin-vendor -config ${{ inputs.config }}
