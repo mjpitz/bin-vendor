@@ -3,16 +3,17 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/mjpitz/bindir/internal/archive/targz"
-	"github.com/mjpitz/bindir/internal/archive/zip"
-	"github.com/mjpitz/bindir/internal/github"
-	"github.com/mjpitz/bindir/internal/model"
 	"io/ioutil"
 	"log"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
+
+	"github.com/mjpitz/bindir/internal/archive/targz"
+	"github.com/mjpitz/bindir/internal/archive/zip"
+	"github.com/mjpitz/bindir/internal/github"
+	"github.com/mjpitz/bindir/internal/model"
 
 	"github.com/ghodss/yaml"
 )
@@ -59,7 +60,10 @@ func main() {
 	for _, tool := range config.Tools {
 		var fileName string
 
-		ref := fmt.Sprintf("%s@%s", tool.Name, tool.Version)
+		safeVersion := strings.ReplaceAll(tool.Version, "/", "_")
+		safeVersion = strings.ReplaceAll(safeVersion, "\\", "_")
+
+		ref := fmt.Sprintf("%s@%s", tool.Name, safeVersion)
 
 		log.Println("fetching", ref)
 		if tool.GitHubRelease != nil {

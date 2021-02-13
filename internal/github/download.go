@@ -3,14 +3,17 @@ package github
 import (
 	"bytes"
 	"fmt"
-	"github.com/Masterminds/sprig"
-	"github.com/mjpitz/bindir/internal/model"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"path"
 	"runtime"
 	"text/template"
+
+	"github.com/Masterminds/sprig"
+
+	"github.com/mjpitz/bindir/internal/model"
 )
 
 func Download(tool *model.Tool, vendor string) (string, error) {
@@ -56,7 +59,7 @@ func Download(tool *model.Tool, vendor string) (string, error) {
 	fileName := buf.String()
 
 	asset := fmt.Sprintf("https://github.com/%s/releases/download/%s/%s",
-		gh.Repository, version, fileName)
+		gh.Repository, url.QueryEscape(version), url.QueryEscape(fileName))
 
 	resp, err := http.Get(asset)
 	if err != nil {
