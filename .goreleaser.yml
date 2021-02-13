@@ -7,6 +7,9 @@ builds:
   - id: bin-vendor
     main: ./cmd/bin-vendor/main.go
     binary: bin-vendor
+    env:
+      - CGO_ENABLED=0
+      - GO111MODULE=on
     goos:
       - darwin
       - linux
