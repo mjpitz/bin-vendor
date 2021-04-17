@@ -74,6 +74,7 @@ func main() {
 
 		packed := path.Join(vendorDirectory, fileName)
 		unpacked := path.Join(vendorDirectory, ref)
+		binary := false
 
 		if strings.HasSuffix(fileName, ".tar.gz") {
 			err = targz.Untargz(packed, unpacked)
@@ -81,12 +82,27 @@ func main() {
 			err = targz.Untargz(packed, unpacked)
 		} else if strings.HasSuffix(fileName, ".zip") {
 			err = zip.Unzip(packed, unpacked)
+		} else {
+			binary = true
+			unpacked = packed
 		}
 
 		fatal(err)
 
 		binaryLink, err := filepath.Abs(path.Join(binDirectory, tool.Name))
 		fatal(err)
+
+		if binary {
+			unpacked, err = filepath.Abs(unpacked)
+			fatal(err)
+
+			err = os.Chmod(unpacked, 0755)
+			fatal(err)
+
+			_ = os.Remove(binaryLink)
+			_ = os.Symlink(unpacked, binaryLink)
+			continue
+		}
 
 		err = filepath.Walk(unpacked, func(path string, info os.FileInfo, err error) error {
 			if err != nil || info.IsDir() {
