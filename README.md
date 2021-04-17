@@ -28,7 +28,7 @@ The easiest way to get started is with curl.
 Alternatively, just pop over to the releases section.
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/mjpitz/bin-vendor/main/install.sh | VERSION=v0.0.4 bash -s -
+curl -sSL https://raw.githubusercontent.com/mjpitz/bin-vendor/main/install.sh | VERSION=v0.0.5 bash -s -
 ```
 
 ### Using the GitHub Action
@@ -48,7 +48,7 @@ jobs:
       - name: Vendor tooling
         uses: mjpitz/bin-vendor@main
         # with:
-        #   version: v0.0.4
+        #   version: v0.0.5
         #   config: alternate-bin.yaml
 
       - name: Build
